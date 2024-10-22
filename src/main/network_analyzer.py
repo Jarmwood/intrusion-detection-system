@@ -21,6 +21,7 @@ def packet_callback(packet):
 
 sniff(prn=packet_callback, iface='eth0', count=10)
 
+
 def analyze_packet(packet):
     """
     Method to analyze a single packet and return if it's an anomaly.
