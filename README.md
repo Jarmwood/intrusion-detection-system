@@ -1,4 +1,4 @@
-# IDS | Intrusion Detection System | Python + SciKit-learn +  
+# IDS | Intrusion Detection System | Python + SciKit-learn + Scapy
 
 Developed Intrusion Detection System (IDS) that monitors network traffic and alerts on suspicious or malicious activity using techniques like Snort rules.
 
@@ -20,7 +20,7 @@ Download/install
 unit tests using pytest
 run ```pytest network_analyzer.py```
 
-## Depenedencies 
+## Dependencies 
 All the libraries and versions used are located in the env.yml file and requirements file but a brief overview is as follows:
 - Python
 - Pandas
