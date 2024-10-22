@@ -7,11 +7,7 @@ def packet_callback(packet):
     """
     Method to capture network packets and analyze them,
     displaying the source and destination IP addresses and ports
-
-    Parameters:
-    ----------
-    packet : string
-        network packet
+    :param packet : string
     """
     if packet.haslayer(IP) and packet.haslayer(TCP):
         ip_src = packet[IP].src
@@ -24,3 +20,14 @@ def packet_callback(packet):
 
 
 sniff(prn=packet_callback, iface='eth0', count=10)
+
+def analyze_packet(packet):
+    """
+    Method to analyze a single packet and return if it's an anomaly.
+    :param packet: string
+    :return: boolean
+    """
+    if packet.haslayer(IP) and packet.haslayer(TCP):
+        packet_size = len(packet)
+        return packet_size > 1000
+    return False
