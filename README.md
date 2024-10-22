@@ -4,7 +4,7 @@ Developed Intrusion Detection System (IDS) that monitors network traffic and ale
 
 ## Prerequisites
 Download/install
-* [PyCharm](https://www.jetbrains.com/pycharm/download/): Pycharm is a JetBRains is a feature rich IDE, specifically created with python in mind.
+* [PyCharm](https://www.jetbrains.com/pycharm/download/): Pycharm is a JetBrains is a feature rich IDE, specifically created with python in mind.
 * [Anaconda(MiniConda)](https://docs.anaconda.com/miniconda/): Anaconda is an environment management system, Miniconda is a (free) miniature installation of Anaconda Distribution that includes only conda, Python, the packages they both depend on, and a small number of other useful packages.
 
 ## Installation
