@@ -1,4 +1,7 @@
-from scapy.all import sniff, IP, TCP
+from scapy.all import sniff
+from scapy.layers.inet import IP, TCP
+from sklearn.ensemble import IsolationForest
+import numpy as np
 
 data = []
 
