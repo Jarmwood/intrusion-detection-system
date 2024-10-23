@@ -3,7 +3,13 @@ from scapy.layers.inet import IP, TCP
 from sklearn.ensemble import IsolationForest
 import numpy as np
 
-data = []
+# initialize the ML IF model
+model = IsolationForest(n_estimators=100, contamination=0.1, random_state=42)
+
+# sample data for training(features like packet size can be used).
+# in practice, this would come from a dataset of normal packets.
+training_data = np.array([[500], [600], [450], [700],[480], [520], [470]])
+model.fit(training_data)
 
 
 def packet_callback(packet):
