@@ -10,7 +10,7 @@ Download/install
 ## Installation
 1. open the cloned down repository as a project
 2. Open settings and navigate to:
-   3. ```Settings -> Project -> Python Interpreter```
+   1. ```Settings -> Project -> Python Interpreter```
 3. Click add interpreter -> add local interpreter
 4. Choose conda tab -> use existing env -> ```intrusionDetectionSystem```
 
