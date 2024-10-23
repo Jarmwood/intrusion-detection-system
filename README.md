@@ -1,6 +1,6 @@
 # IDS | Intrusion Detection System | Python + SciKit-learn + Scapy
 
-Developed Intrusion Detection System (IDS) that monitors network traffic and alerts on suspicious or malicious activity using techniques like Snort rules.
+Developed Intrusion Detection System (IDS) that monitors network traffic and alerts on suspicious or malicious activity using machine learning models like Isolation Forrest.
 
 ## Prerequisites
 Download/install
