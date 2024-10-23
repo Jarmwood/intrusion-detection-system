@@ -1,3 +1,4 @@
+from pyexpat import features
 from scapy.all import sniff
 from scapy.layers.inet import IP, TCP
 from sklearn.ensemble import IsolationForest
@@ -10,6 +11,15 @@ model = IsolationForest(n_estimators=100, contamination=0.1, random_state=42)
 # in practice, this would come from a dataset of normal packets.
 training_data = np.array([[500], [600], [450], [700],[480], [520], [470]])
 model.fit(training_data)
+
+def extract_features(packet):
+    """
+    Method to extract features from packet for the model.
+    :param packet: network packet to extract features from.
+    :return: list: a list of features extracted from the packet.
+    """
+    packet_size = len(packet)
+    return [packet_size]
 
 
 def packet_callback(packet):
