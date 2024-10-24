@@ -1,4 +1,4 @@
-from pyexpat import features
+import pytest
 from scapy.all import sniff
 from scapy.layers.inet import IP, TCP
 from sklearn.ensemble import IsolationForest
@@ -46,10 +46,9 @@ def analyze_packet(packet):
     :param packet: string input of network packet to analyze.
     :return: boolean: true if packet is considered an anomaly and false otherwise.
     """
-    if packet.haslayer(IP) and packet.haslayer(TCP):
-        packet_size = len(packet)
-        return packet_size > 1000
-    return False
+    features = extract_features(packet)
+    prediction = model.predict([features])
+    return prediction[0] == -1
 
 def start_sniffing(interface='eth0', packet_count=100):
     """
@@ -57,7 +56,7 @@ def start_sniffing(interface='eth0', packet_count=100):
     :param interface: string input of the network interface to sniff on (e.g., 'eth0')
     :param packet_count: int input of the number of packets to capture
     """
-    print(f'Starting packet capture on interface to sniff on (e.g., ''eth0)')
+    print(f'Starting packet capture on {interface}...')
     sniff(prn=packet_callback, iface=interface, count=packet_count)
     print('Packet capture complete.')
 
