@@ -34,8 +34,9 @@ jobs:
       - name: Install dependencies
         run: |
           if test -d ~/miniconda3/envs/IntrusionDetectionSystem; then
-              conda remove -y -n IntrusionDetectionSystem --all
-              rm -rf ~/miniconda3/envs/IntrusionDetectionSystem
+            conda remove -y -n IntrusionDetectionSystem --all
+            rm -rf ~/miniconda3/envs/IntrusionDetectionSystem
+          fi
           conda env create --file=env.yml
 
       - name: Run unit tests
