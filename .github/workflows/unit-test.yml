@@ -26,7 +26,11 @@ jobs:
           ~/miniconda3/bin/conda update conda
 
       - name: Install dependencies
-        run: conda env create --file=env.yml
+        run: |
+          if test -d ~/miniconda3/envs/IntrusionDetectionSystem; then
+              conda remove -y -n IntrusionDetectionSystem --all
+              rm -rf ~/miniconda3/envs/IntrusionDetectionSystem
+          conda env create --file=env.yml
 
       - name: Run unit tests
         run: |
