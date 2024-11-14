@@ -42,6 +42,6 @@ jobs:
 
       - name: Lint with flake8
         run: |
-          pip install flake8 -y
+          pip install -y flake8
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           flake8 . --count --exit-zero --max-line-length=127 --statistics
