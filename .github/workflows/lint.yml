@@ -27,7 +27,12 @@ jobs:
 
       - name: Install dependencies
         # creates a new conda environment
-        run: conda env create --file=env.yml
+        run: |
+          if test -d ~/miniconda3/envs/IntrusionDetectionSystem; then
+              conda remove -y -n IntrusionDetectionSystem --all
+              rm -rf ~/miniconda3/envs/IntrusionDetectionSystem
+          fi
+          conda env create --file=env.yml
 
       - name: Lint with flake8
         run: |
