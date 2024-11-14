@@ -1,16 +1,17 @@
-import pytest
-from scapy.all import sniff
-from scapy.layers.inet import IP, TCP
-from sklearn.ensemble import IsolationForest
 import numpy as np
+from scapy.all import sniff
+from scapy.layers.inet import IP
+from sklearn.ensemble import IsolationForest
 
 # initialize the ML IF model
 model = IsolationForest(n_estimators=100, contamination=0.1, random_state=42)
 
 # sample data for training(features like packet size can be used).
 # in practice, this would come from a dataset of normal packets.
-training_data = np.array([[500], [600], [450], [700],[480], [520], [470]])
+
+training_data = np.array([[500], [600], [450], [700], [480], [520], [470]])
 model.fit(training_data)
+
 
 def extract_features(packet):
     """
@@ -50,6 +51,7 @@ def analyze_packet(packet):
     prediction = model.predict([features])
     return prediction[0] == -1
 
+
 def start_sniffing(interface='eth0', packet_count=100):
     """
     mathod to sniff network packets on the specified interface and analyze them.
@@ -59,6 +61,7 @@ def start_sniffing(interface='eth0', packet_count=100):
     print(f'Starting packet capture on {interface}...')
     sniff(prn=packet_callback, iface=interface, count=packet_count)
     print('Packet capture complete.')
+
 
 if __name__ == "__main__":
     start_sniffing(interface='eth0', packet_count=10)

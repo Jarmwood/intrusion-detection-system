@@ -14,8 +14,20 @@ Download/install
 3. Click add interpreter -> add local interpreter
 4. Choose conda tab -> use existing env -> ```intrusionDetectionSystem```
 
-## Run API
-
+## common Conda commands
+* To see all conda environments ```conda env list```.
+* To switch to a different environment ```conda activate <env_name>```
+  * Make sure to run ```conda deactivate``` before switching to a different environment
+* To export current environment settings run ```conda env export -n <env_name> <path/to/file_name>```
+* To delete environment run ```conda remove -n <env_name> --all```
+* To update environment run ```conda env update -f env.yml --prune```
+* In the event you break your local conda environment, you can 'roll back' to a previous revision point
+  * First run ```conda list --revisions```
+    * It will return a list of revisions with their associated revision number
+    * Then, look at the second-to-last revision and take note it's number
+  * To revert back run ```conda install --revision N```
+    * here 'N' is the specified revision number
+* To update all packages in your environment, you can use the ```conda update --all``` command
 ## Testing
 unit tests using pytest
 run ```pytest network_analyzer.py```
