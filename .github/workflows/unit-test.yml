@@ -38,6 +38,7 @@ jobs:
             rm -rf ~/miniconda3/envs/intrusionDetectionSystem
           fi
           conda env create --file=env.yml
+          conda activate intrusionDetectionSystem
 
       - name: Run unit tests
         run: |

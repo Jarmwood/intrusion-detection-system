@@ -27,6 +27,7 @@ Download/install
     * Then, look at the second-to-last revision and take note it's number
   * To revert back run ```conda install --revision N```
     * here 'N' is the specified revision number
+* To update all packages in your environment, you can use the ```conda update --all``` command
 ## Testing
 unit tests using pytest
 run ```pytest network_analyzer.py```

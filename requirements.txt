@@ -1,6 +1,0 @@
-# Some libraries have been unknown to Conda but found via pip - those will be house here:
-scapy~=2.6.0
-pandas~=2.2.3
-scikit-learn~=1.5.2
-numpy~=2.1.2
-pytest~=8.3.3
