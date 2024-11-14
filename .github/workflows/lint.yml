@@ -22,20 +22,21 @@ jobs:
         #checks if conda is installed before installing again
         run: |
           if ! test -f ~/miniconda3/bin/conda; then
-          mkdir -p ~/miniconda3
-          wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
-          bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
-          rm -rf ~/miniconda3/miniconda.sh
-          ~/miniconda3/bin/conda init bash
-          rm -rf ~/.condarc
-          ~/miniconda3/bin/conda update conda
+            mkdir -p ~/miniconda3
+            wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ~/miniconda3/miniconda.sh
+            bash ~/miniconda3/miniconda.sh -b -u -p ~/miniconda3
+            rm -rf ~/miniconda3/miniconda.sh
+            ~/miniconda3/bin/conda init bash
+            rm -rf ~/.condarc
+            ~/miniconda3/bin/conda update conda
+          fi
 
       - name: Install dependencies
         # creates a new conda environment
         run: |
           if test -d ~/miniconda3/envs/IntrusionDetectionSystem; then
-              conda remove -y -n IntrusionDetectionSystem --all
-              rm -rf ~/miniconda3/envs/IntrusionDetectionSystem
+            conda remove -y -n IntrusionDetectionSystem --all
+            rm -rf ~/miniconda3/envs/IntrusionDetectionSystem
           fi
           conda env create --file=env.yml
 
