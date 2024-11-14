@@ -1,9 +1,3 @@
-import pytest
-from unittest.mock import MagicMock, patch
-from src.main import network_analyzer
-from scapy.layers.inet import IP, TCP
-from src.main.network_analyzer import extract_features, analyze_packet, packet_callback, model
-
 def test_hello_world():
     print('Hello world!')
 
