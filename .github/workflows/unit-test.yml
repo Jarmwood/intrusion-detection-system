@@ -1,0 +1,33 @@
+name: Unit Tests
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.11.10
+
+      - name: add conda to system path
+        #checks if conda is installed before installing again
+        run: |
+          if ! test -f ~/miniconda3/bin/conda; then
+          mkdir -p ~/miniconda3
+          wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-86_64.sh -0 ~/miniconda3/miniconda.sh
+          bash ~/miniconda3/miniconda.sh
+          rm -rf ~/miniconda3/miniconda.sh
+          ~/miniconda3/bin/conda init bash
+          rm -rf ~/.condarc
+          ~/miniconda3/bin/conda update conda
+
+      - name: Install dependencies
+        run: conda env create --file=env.yml
+
+      - name: Run unit tests
+        run: |
+          pytest
