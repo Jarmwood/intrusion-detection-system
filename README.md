@@ -1,4 +1,4 @@
-# IDS | Intrusion Detection System | Python + SciKit-learn + Scapy
+# IDS | AI Powered Intrusion Detection System 
 
 Developed Intrusion Detection System (IDS) that monitors network traffic and alerts on suspicious or malicious activity using machine learning models like Isolation Forrest.
 
@@ -33,11 +33,14 @@ unit tests using pytest
 run ```pytest network_analyzer.py```
 
 ## Dependencies 
-All the libraries and versions used are located in the env.yml file and requirements file but a brief overview is as follows:
+All the libraries and versions used are located in the requirements file but a brief overview is as follows:
 - Python
 - Pandas
 - Scapy
 - Scikit-learn
 - Pytest
+
+## Docker Environment 
+This environment is containerized with Docker to easily house dependencies when shared.
 
 ## Demo
