@@ -1,7 +1,0 @@
-scapy
-pandas
-scikit-learn
-pyshark
-pytest
-docker
-python

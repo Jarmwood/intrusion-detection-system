@@ -10,3 +10,8 @@ def setup_logger() -> logging.Logger:
     handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
     logger.addHandler(handler)
     return logger
+
+def extract_ip_features(packet):
+    ip_src = packet[IP].src
+    ip_dst = packet[IP].dst
+    return ip_src, ip_dst

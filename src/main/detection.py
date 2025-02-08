@@ -1,11 +1,23 @@
 from sklearn.ensemble import IsolationForest
 import pandas as pd
+import joblib
 
-def detect_intrusions(model: IsolationForest, df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Detect intrusions in the given network packet data using a trained model.
-    """
-    df['anomaly'] = model.predict(df[['len']])
-    # Map anomaly to human-readable labels: 1 for normal, -1 for anomalous
-    df['anomaly'] = df['anomaly'].map({1: 'normal', -1: 'anomalous'})
-    return df
+def train_model():
+    # Dummy data for the sake of training an Isolation Forest model.
+    data = pd.DataFrame({
+        "ip_src": [1, 2, 3, 4],
+        "ip_dst": [5, 6, 7, 8],
+        "protocol": [17, 6, 17, 6],  # 17 = UDP, 6 = TCP
+        "port_src": [80, 443, 53, 22],
+        "port_dst": [8080, 8443, 53, 22]
+    })
+    model = IsolationForest(n_estimators=100)
+    model.fit(data)
+    
+    # Save the model for later use
+    joblib.dump(model, 'model.pkl')
+    return model
+
+def predict(model, data):
+    # Predict using the model
+    return model.predict(data)

@@ -1,22 +1,25 @@
-# syntax=docker/dockerfile:1
+# Use an official Python base image
+FROM python:3.11-slim
 
-# Comments are provided throughout this file to help you get started.
-# If you need more help, visit the Dockerfile reference guide at
-# https://docs.docker.com/go/dockerfile-reference/
-
-# Want to help us make this template better? Share your feedback here: https://forms.gle/ybq9Krt8jtBL3iCk7
-
-ARG PYTHON_VERSION=3.11.10
-FROM python:${PYTHON_VERSION}-slim as base
-
-# Prevents Python from writing pyc files.
-ENV PYTHONDONTWRITEBYTECODE=1
-
-# Keeps Python from buffering stdout and stderr to avoid situations where
-# the application crashes without emitting any logs due to buffering.
-ENV PYTHONUNBUFFERED=1
-
+# Set the working directory
 WORKDIR /app
+
+# Install dependencies: wget, curl, and bzip2 (for Conda)
+RUN apt-get update && \
+    apt-get install -y wget curl bzip2 ca-certificates && \
+    rm -rf /var/lib/apt/lists/*
+
+# Install Miniconda (or Anaconda)
+RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh && \
+    bash Miniconda3-latest-Linux-x86_64.sh -b -f -p /opt/conda && \
+    rm Miniconda3-latest-Linux-x86_64.sh && \
+    /opt/conda/bin/conda init
+
+# Make conda available in the PATH
+ENV PATH="/opt/conda/bin:$PATH"
+
+# Copy your environment.yml file to the container
+COPY env.yml /app/
 
 # Create a non-privileged user that the app will run under.
 # See https://docs.docker.com/go/dockerfile-user-best-practices/
@@ -30,22 +33,14 @@ RUN adduser \
     --uid "${UID}" \
     appuser
 
-# Download dependencies as a separate step to take advantage of Docker's caching.
-# Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
-# Leverage a bind mount to requirements.txt to avoid having to copy them into
-# into this layer.
-RUN --mount=type=cache,target=/root/.cache/pip \
-    --mount=type=bind,source=requirements.txt,target=requirements.txt \
-    python -m pip install -r requirements.txt
+# Create the conda environment based on the environment file
+RUN conda env create -f env.yml
 
-# Switch to the non-privileged user to run the application.
-USER appuser
+# Activate the environment and set the default environment to be used
+RUN echo "conda activate intrusionDetectionSystem" >> ~/.bashrc
 
-# Copy the source code into the container.
-COPY . .
+# Set the entry point to activate the conda environment
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "intrusionDetectionSystem"]
 
-# Expose the port that the application listens on.
-EXPOSE 8000
 
-# Run the application.
-CMD python main.py
+CMD ["python","main.py"]
