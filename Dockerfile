@@ -18,11 +18,10 @@ RUN wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh &
 # Make conda available in the PATH
 ENV PATH="/opt/conda/bin:$PATH"
 
-# Copy your environment.yml file to the container
-COPY env.yml /app/
+# Copy environment to the container
+COPY . .
 
 # Create a non-privileged user that the app will run under.
-# See https://docs.docker.com/go/dockerfile-user-best-practices/
 ARG UID=10001
 RUN adduser \
     --disabled-password \
@@ -41,6 +40,3 @@ RUN echo "conda activate intrusionDetectionSystem" >> ~/.bashrc
 
 # Set the entry point to activate the conda environment
 ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "intrusionDetectionSystem"]
-
-
-CMD ["python","main.py"]
