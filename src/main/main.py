@@ -5,7 +5,7 @@ import pandas as pd
 
 def main():
     # Capture packets for 60 seconds
-    packets = sniff(timeout=60)
+    packets = sniff(timeout=60, filter="ip")  # Only capture IP packets
 
     # Preprocess captured packets
     data = preprocess_data(packets)
