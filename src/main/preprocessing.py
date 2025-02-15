@@ -1,12 +1,18 @@
 import pandas as pd
-from scapy.all import IP, TCP, UDP, ICMP
+from scapy.all import IP, TCP, UDP
+
+def ip_to_int(ip: str) -> int:
+    """
+    Convert an IP address to a unique integer representation.
+    """
+    return int.from_bytes([int(x) for x in ip.split('.')], byteorder='big')
 
 def preprocess_data(packets):
     features = []
     for packet in packets:
         if IP in packet:
-            ip_src = packet[IP].src
-            ip_dst = packet[IP].dst
+            ip_src = ip_to_int(packet[IP].src)
+            ip_dst = ip_to_int(packet[IP].dst)
             protocol = packet.proto
             if TCP in packet:
                 port_src = packet[TCP].sport
@@ -17,7 +23,5 @@ def preprocess_data(packets):
             else:
                 port_src = port_dst = None
             features.append([ip_src, ip_dst, protocol, port_src, port_dst])
-    
+
     return pd.DataFrame(features, columns=["ip_src", "ip_dst", "protocol", "port_src", "port_dst"])
-
-
