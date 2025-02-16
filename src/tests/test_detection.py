@@ -1,7 +1,6 @@
-import pytest
-from src.main.detection import train_model, predict
-import pandas as pd
+from src.ids.detection import train_model, predict
 from sklearn.ensemble import IsolationForest
+import pandas as pd
 
 def test_train_model():
     model = train_model()
@@ -12,7 +11,7 @@ def test_predict():
     data = pd.DataFrame({
         "ip_src": ["192.168.1.1"],
         "ip_dst": ["192.168.1.2"],
-        "protocol": [17],  # UDP
+        "protocol": [17], 
         "port_src": [12345],
         "port_dst": [80]
     })

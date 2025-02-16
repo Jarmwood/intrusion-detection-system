@@ -1,4 +1,4 @@
-from src.main.network_capture import capture_packets
+from src.ids.network_capture import capture_packets
 from unittest.mock import patch
 import scapy.all as scapy
 
@@ -11,7 +11,7 @@ def test_capture_packets():
     
     # Mock scapy.sniff to return the mock packets
     with patch('scapy.sendrecv.sniff', return_value=mock_packets):
-        df = capture_packets(interface='Wi-Fi', count=5)  # Adjust as needed for your test
+        df = capture_packets(interface='Wi-Fi', count=5)
         print(df)
 
 

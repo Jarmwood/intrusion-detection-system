@@ -1,5 +1,5 @@
 import pytest
-from src.main.preprocessing import preprocess_data
+from src.ids.preprocessing import preprocess_data
 from scapy.all import IP, Ether, TCP
 
 def test_preprocess_data():

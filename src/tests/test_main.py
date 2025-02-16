@@ -1,5 +1,5 @@
 import pytest
-from src.main.main import main
+from src.ids.main import main
 
 def test_main():
     # This would ideally mock `scapy.sniff()` to simulate packet capture

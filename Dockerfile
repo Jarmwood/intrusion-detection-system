@@ -37,6 +37,3 @@ RUN conda env create -f env.yml
 
 # Activate the environment and set the default environment to be used
 RUN echo "conda activate intrusionDetectionSystem" >> ~/.bashrc
-
-# Set the entry point to activate the conda environment
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "intrusionDetectionSystem"]

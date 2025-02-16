@@ -1,4 +1,4 @@
-from src.main.model import train_isolation_forest
+from src.ids.model import train_isolation_forest
 import pandas as pd
 
 def test_train_isolation_forest():

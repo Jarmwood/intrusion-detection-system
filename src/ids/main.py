@@ -1,5 +1,5 @@
-from src.main.preprocessing import preprocess_data
-from src.main.detection import train_model, predict
+from src.ids.preprocessing import preprocess_data
+from src.ids.detection import train_model, predict
 from scapy.all import sniff
 import pandas as pd
 
