@@ -2,15 +2,37 @@ import pandas as pd
 from scapy.all import IP, TCP, UDP
 from src.ids.preprocessing import ip_to_int
 
-class Preprocesing:
+class Preprocessing:
 
-    def ip_to_int(self, ip: str) -> int:
+    @staticmethod
+    def ip_to_int(ip: str) -> int:
         """
         Convert an IP address to a unique integer representation.
-        """
-        return int.from_bytes([int(x) for x in ip.split('.')], byteorder='big')
 
-    def preprocess_data(self, packets):
+        Args:
+            ip (str): The IPv4 address in string format (e.g., '192.168.1.1').
+
+        Returns:
+            int: The integer representation of the IP address.
+
+        Raises:
+            ValueError: If the IP address is invalid.
+        """
+        octets = ip.split('.')
+        if len(octets) != 4:
+            raise ValueError(f"Invalid IP address: {ip}. IP should have 4 octets.")
+
+        try:
+            bytes_ = [int(octet) for octet in octets]
+            if not all(0 <= byte <= 255 for byte in bytes_):
+                raise ValueError(f"Invalid IP address: {ip}. Each octet should be between 0 and 255.")
+        except ValueError:
+            raise ValueError(f"Invalid IP address: {ip}. All octets must be integers.")
+
+        return int.from_bytes(bytes_, byteorder='big')
+
+    @staticmethod
+    def preprocess_data(packets):
         features = []
         for packet in packets:
             if IP in packet:
